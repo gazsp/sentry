@@ -121,6 +121,13 @@ interface UserInterface {
 	public function checkPersistCode($persistCode);
 
 	/**
+	 * Destroys the current persist code.
+	 * 
+	 * @return void
+	 */
+	public function forgetPersistCode();
+
+	/**
 	 * Get an activation code for the given user.
 	 *
 	 * @return string

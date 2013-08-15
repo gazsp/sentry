@@ -356,7 +356,12 @@ class Sentry {
 	 */
 	public function logout()
 	{
-		$this->user = null;
+		if ($this->getUser())
+		{
+			$this->user->forgetPersistCode();
+
+			$this->user = null;
+		}
 
 		$this->session->forget();
 		$this->cookie->forget();
