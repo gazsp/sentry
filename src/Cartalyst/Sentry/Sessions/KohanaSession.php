@@ -37,7 +37,7 @@ class KohanaSession implements SessionInterface {
 	/**
 	 * Creates a new Kohana Session driver for Sentry.
 	 *
-	 * @param  string  $store
+	 * @param  \Session  $store
 	 * @param  string  $key
 	 * @return void
 	 */

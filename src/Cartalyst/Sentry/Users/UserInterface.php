@@ -84,8 +84,8 @@ interface UserInterface {
 	 * Exceptions if validation fails.
 	 *
 	 * @return bool
-	 * @throws Cartalyst\Sentry\Users\LoginRequiredException
-	 * @throws Cartalyst\Sentry\Users\UserExistsException
+	 * @throws \Cartalyst\Sentry\Users\LoginRequiredException
+	 * @throws \Cartalyst\Sentry\Users\UserExistsException
 	 */
 	public function validate();
 
@@ -141,7 +141,7 @@ interface UserInterface {
 	 *
 	 * @param  string  $activationCode
 	 * @return bool
-	 * @throws Cartalyst\Sentry\Users\UserAlreadyActivatedException
+	 * @throws \Cartalyst\Sentry\Users\UserAlreadyActivatedException
 	 */
 	public function attemptActivation($activationCode);
 
@@ -198,7 +198,7 @@ interface UserInterface {
 	/**
 	 * Adds the user to the given group
 	 *
-	 * @param  Cartalyst\Sentry\Groups\GroupInterface  $group
+	 * @param  \Cartalyst\Sentry\Groups\GroupInterface  $group
 	 * @return bool
 	 */
 	public function addGroup(GroupInterface $group);
@@ -206,7 +206,7 @@ interface UserInterface {
 	/**
 	 * Removes the user from the given group.
 	 *
-	 * @param  Cartalyst\Sentry\Groups\GroupInterface  $group
+	 * @param  \Cartalyst\Sentry\Groups\GroupInterface  $group
 	 * @return bool
 	 */
 	public function removeGroup(GroupInterface $group);
@@ -214,7 +214,7 @@ interface UserInterface {
 	/**
 	 * See if the user is in the given group.
 	 *
-	 * @param  Cartalyst\Sentry\Groups\GroupInterface  $group
+	 * @param  \Cartalyst\Sentry\Groups\GroupInterface  $group
 	 * @return bool
 	 */
 	public function inGroup(GroupInterface $group);

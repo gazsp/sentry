@@ -92,7 +92,7 @@ class User extends Model implements UserInterface {
 	/**
 	 * The hasher the model uses.
 	 *
-	 * @var Cartalyst\Sentry\Hashing\HasherInterface
+	 * @var \Cartalyst\Sentry\Hashing\HasherInterface
 	 */
 	protected static $hasher;
 
@@ -263,9 +263,9 @@ class User extends Model implements UserInterface {
 	 * Exceptions if validation fails.
 	 *
 	 * @return bool
-	 * @throws Cartalyst\Sentry\Users\LoginRequiredException
-	 * @throws Cartalyst\Sentry\Users\PasswordRequiredException
-	 * @throws Cartalyst\Sentry\Users\UserExistsException
+	 * @throws \Cartalyst\Sentry\Users\LoginRequiredException
+	 * @throws \Cartalyst\Sentry\Users\PasswordRequiredException
+	 * @throws \Cartalyst\Sentry\Users\UserExistsException
 	 */
 	public function validate()
 	{
@@ -390,7 +390,7 @@ class User extends Model implements UserInterface {
 	 *
 	 * @param  string  $activationCode
 	 * @return bool
-	 * @throws Cartalyst\Sentry\Users\UserAlreadyActivatedException
+	 * @throws \Cartalyst\Sentry\Users\UserAlreadyActivatedException
 	 */
 	public function attemptActivation($activationCode)
 	{
@@ -501,7 +501,7 @@ class User extends Model implements UserInterface {
 	/**
 	 * Adds the user to the given group.
 	 *
-	 * @param  Cartalyst\Sentry\Groups\GroupInterface  $group
+	 * @param \Cartalyst\Sentry\Groups\GroupInterface  $group
 	 * @return bool
 	 */
 	public function addGroup(GroupInterface $group)
@@ -509,6 +509,7 @@ class User extends Model implements UserInterface {
 		if ( ! $this->inGroup($group))
 		{
 			$this->groups()->attach($group);
+			$this->userGroups = null;
 		}
 
 		return true;
@@ -517,7 +518,7 @@ class User extends Model implements UserInterface {
 	/**
 	 * Removes the user from the given group.
 	 *
-	 * @param  Cartalyst\Sentry\Groups\GroupInterface  $group
+	 * @param \Cartalyst\Sentry\Groups\GroupInterface  $group
 	 * @return bool
 	 */
 	public function removeGroup(GroupInterface $group)
@@ -525,6 +526,7 @@ class User extends Model implements UserInterface {
 		if ($this->inGroup($group))
 		{
 			$this->groups()->detach($group);
+			$this->userGroups = null;
 		}
 
 		return true;
@@ -533,7 +535,7 @@ class User extends Model implements UserInterface {
 	/**
 	 * See if the user is in the given group.
 	 *
-	 * @param  Cartalyst\Sentry\Groups\GroupInterface  $group
+	 * @param \Cartalyst\Sentry\Groups\GroupInterface  $group
 	 * @return bool
 	 */
 	public function inGroup(GroupInterface $group)
@@ -886,7 +888,7 @@ class User extends Model implements UserInterface {
 	/**
 	 * Sets the hasher for the user.
 	 *
-	 * @param  Cartalyst\Sentry\Hashing\HasherInterface  $hasher
+	 * @param \Cartalyst\Sentry\Hashing\HasherInterface $hasher
 	 * @return void
 	 */
 	public static function setHasher(HasherInterface $hasher)
@@ -897,7 +899,7 @@ class User extends Model implements UserInterface {
 	/**
 	 * Returns the hasher for the user.
 	 *
-	 * @return Cartalyst\Sentry\Hashing\HasherInterface
+	 * @return \Cartalyst\Sentry\Hashing\HasherInterface
 	 */
 	public static function getHasher()
 	{

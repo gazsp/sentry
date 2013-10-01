@@ -118,7 +118,7 @@ class User extends \ORM implements UserInterface {
 	/**
 	 * The hasher the model uses.
 	 *
-	 * @var Cartalyst\Sentry\Hashing\HasherInterface
+	 * @var \Cartalyst\Sentry\Hashing\HasherInterface
 	 */
 	protected static $hasher;
 
@@ -289,7 +289,7 @@ class User extends \ORM implements UserInterface {
 	 * Exceptions if validation fails.
 	 *
 	 * @return bool
-	 * @throws ORM_Validation_Exception
+	 * @throws \ORM_Validation_Exception
 	 */
 	public function validate()
 	{
@@ -299,10 +299,10 @@ class User extends \ORM implements UserInterface {
 	/**
 	 * Saves the user.
 	 *
-	 * @param  array  $options
+	 * @param  \Validation  $validation
 	 * @return bool
 	 */
-	public function save(Validation $validation = NULL)
+	public function save(\Validation $validation = NULL)
 	{
 		$this->validate();
 
@@ -419,7 +419,7 @@ class User extends \ORM implements UserInterface {
 	 *
 	 * @param  string  $activationCode
 	 * @return bool
-	 * @throws Cartalyst\Sentry\Users\UserAlreadyActivatedException
+	 * @throws \Cartalyst\Sentry\Users\UserAlreadyActivatedException
 	 */
 	public function attemptActivation($activationCode)
 	{
@@ -530,7 +530,7 @@ class User extends \ORM implements UserInterface {
 	/**
 	 * Adds the user to the given group.
 	 *
-	 * @param  Cartalyst\Sentry\Groups\GroupInterface  $group
+	 * @param \Cartalyst\Sentry\Groups\GroupInterface  $group
 	 * @return bool
 	 */
 	public function addGroup(GroupInterface $group)
@@ -546,7 +546,7 @@ class User extends \ORM implements UserInterface {
 	/**
 	 * Removes the user from the given group.
 	 *
-	 * @param  Cartalyst\Sentry\Groups\GroupInterface  $group
+	 * @param \Cartalyst\Sentry\Groups\GroupInterface  $group
 	 * @return bool
 	 */
 	public function removeGroup(GroupInterface $group)
@@ -562,7 +562,7 @@ class User extends \ORM implements UserInterface {
 	/**
 	 * See if the user is in the given group.
 	 *
-	 * @param  Cartalyst\Sentry\Groups\GroupInterface  $group
+	 * @param \Cartalyst\Sentry\Groups\GroupInterface  $group
 	 * @return bool
 	 */
 	public function inGroup(GroupInterface $group)
@@ -651,7 +651,7 @@ class User extends \ORM implements UserInterface {
 			// Now, let's check if the permission ends in a wildcard "*" symbol.
 			// If it does, we'll check through all the merged permissions to see
 			// if a permission exists which matches the wildcard.
-			if ((strlen($permission) > 1) and Text::ends_with($permission, '*'))
+			if ((strlen($permission) > 1) and \Text::ends_with($permission, '*'))
 			{
 				$matched = false;
 
@@ -661,8 +661,8 @@ class User extends \ORM implements UserInterface {
 					$checkPermission = substr($permission, 0, -1);
 
 					// We will make sure that the merged permission does not
-					// exactly match our permission, but starts wtih it.
-					if ($checkPermission != $mergedPermission and Text::starts_with($mergedPermission, $checkPermission) and $value == 1)
+					// exactly match our permission, but starts with it.
+					if ($checkPermission != $mergedPermission and \Text::starts_with($mergedPermission, $checkPermission) and $value == 1)
 					{
 						$matched = true;
 						break;
@@ -670,7 +670,7 @@ class User extends \ORM implements UserInterface {
 				}
 			}
 			
-			elseif ((strlen($permission) > 1) and Text::starts_with($permission, '*'))
+			elseif ((strlen($permission) > 1) and \Text::starts_with($permission, '*'))
 			{
 				$matched = false;
 
@@ -681,7 +681,7 @@ class User extends \ORM implements UserInterface {
 
 					// We will make sure that the merged permission does not
 					// exactly match our permission, but ends with it.
-					if ($checkPermission != $mergedPermission and Text::ends_with($mergedPermission, $checkPermission) and $value == 1)
+					if ($checkPermission != $mergedPermission and \Text::ends_with($mergedPermission, $checkPermission) and $value == 1)
 					{
 						$matched = true;
 						break;
@@ -696,7 +696,7 @@ class User extends \ORM implements UserInterface {
 				foreach ($mergedPermissions as $mergedPermission => $value)
 				{
 					// This time check if the mergedPermission ends in wildcard "*" symbol.
-					if ((strlen($mergedPermission) > 1) and Text::ends_with($mergedPermission, '*'))
+					if ((strlen($mergedPermission) > 1) and \Text::ends_with($mergedPermission, '*'))
 					{
 						$matched = false;
 
@@ -704,8 +704,8 @@ class User extends \ORM implements UserInterface {
 						$checkMergedPermission = substr($mergedPermission, 0, -1);
 
 						// We will make sure that the merged permission does not
-						// exactly match our permission, but starts wtih it.
-						if ($checkMergedPermission != $permission and Text::starts_with($permission, $checkMergedPermission) and $value == 1)
+						// exactly match our permission, but starts with it.
+						if ($checkMergedPermission != $permission and \Text::starts_with($permission, $checkMergedPermission) and $value == 1)
 						{
 							$matched = true;
 							break;
@@ -772,7 +772,7 @@ class User extends \ORM implements UserInterface {
 	 * @param  string  $string
 	 * @param  string  $hashedString
 	 * @return bool
-	 * @throws RuntimeException
+	 * @throws \RuntimeException
 	 */
 	public function checkHash($string, $hashedString)
 	{
@@ -789,7 +789,7 @@ class User extends \ORM implements UserInterface {
 	 *
 	 * @param  string  $string
 	 * @return string
-	 * @throws RuntimeException
+	 * @throws \RuntimeException
 	 */
 	public function hash($string)
 	{
@@ -803,7 +803,9 @@ class User extends \ORM implements UserInterface {
 
 	/**
 	 * Generate a random string. If your server has
+	 * @param int $length
 	 * @return string
+	 * @throws \RuntimeException
 	 */
 	public function getRandomString($length = 42)
 	{
@@ -844,7 +846,7 @@ class User extends \ORM implements UserInterface {
 	/**
 	 * Sets the hasher for the user.
 	 *
-	 * @param  Cartalyst\Sentry\Hashing\HasherInterface  $hasher
+	 * @param \Cartalyst\Sentry\Hashing\HasherInterface  $hasher
 	 * @return void
 	 */
 	public static function setHasher(HasherInterface $hasher)
@@ -855,7 +857,7 @@ class User extends \ORM implements UserInterface {
 	/**
 	 * Returns the hasher for the user.
 	 *
-	 * @return Cartalyst\Sentry\Hashing\HasherInterface
+	 * @return \Cartalyst\Sentry\Hashing\HasherInterface
 	 */
 	public static function getHasher()
 	{
@@ -896,9 +898,8 @@ class User extends \ORM implements UserInterface {
 	/**
 	 * Tests if a unique key value exists in the database.
 	 *
-	 * @param   mixed    the value to test
-	 * @param   string   field name
-	 * @param   string   table name
+	 * @param   mixed  $value  the value to test
+	 * @param   string $field  field name
 	 * @return  boolean
 	 */
 	public function unique_key_exists($value, $field = NULL)
@@ -922,7 +923,7 @@ class User extends \ORM implements UserInterface {
 	/**
 	 * Allows a model use both email and username as unique identifiers for login
 	 *
-	 * @param   string  unique value
+	 * @param   string $value unique value
 	 * @return  string  field name
 	 */
 	public function unique_key($value)
