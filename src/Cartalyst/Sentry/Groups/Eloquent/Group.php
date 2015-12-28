@@ -109,12 +109,7 @@ class Group extends Model implements GroupInterface {
 	{
 		$groupPermissions = $this->getPermissions();
 
-		if ( ! is_array($permissions))
-		{
-			$permissions = (array) $permissions;
-		}
-
-		foreach ($permissions as $permission)
+		foreach ((array) $permissions as $permission)
 		{
 			// We will set a flag now for whether this permission was
 			// matched at all.
@@ -210,12 +205,8 @@ class Group extends Model implements GroupInterface {
 			}
 		}
 
-		if ($all === false)
-		{
-			return false;
-		}
-
-		return true;
+		return $all;
+		
 	}
 
 	/**

@@ -1,4 +1,10 @@
+## Help Support Sentinel version 3
+
+http://igg.me/at/sentinel-open-source
+
 # Sentry
+
+> This package is DEPRECATED, please check our [Sentinel](https://github.com/cartalyst/sentinel) package for a better authentication & authorization system.
 
 Sentry is a PHP 5.3+ fully-featured authentication & authorization system. It also provides additional features such as user groups and additional security features.
 
@@ -28,10 +34,14 @@ It also provides additional features such as user groups and additional security
 
 Installation of Sentry is very easy. We've got a number of guides to get Sentry working with your favorite framework or on it's own:
 
-1. Install in [Laravel 4](http://docs.cartalyst.com/sentry-2/installation/laravel-4)
-2. Install in [FuelPHP 1](http://docs.cartalyst.com/sentry-2/installation/fuelphp-1)
-3. Install in [CodeIgniter 3](http://docs.cartalyst.com/sentry-2/installation/codeigniter-3)
-4. Use [natively (through composer)](http://docs.cartalyst.com/sentry-2/installation/composer)
+- [Install Sentry](https://cartalyst.com/manual/sentry#installation)
+
+### Getting Started
+
+- Use in [Laravel 4](https://cartalyst.com/manual/sentry#laravel-4)
+- Use in [FuelPHP 1](https://cartalyst.com/manual/sentry#fuelphp-1.x)
+- Use in [CodeIgniter 3](https://cartalyst.com/manual/sentry#codeigniter-3.0-dev)
+- Use [natively (through composer)](https://cartalyst.com/manual/sentry#native)
 
 ### Upgrading
 

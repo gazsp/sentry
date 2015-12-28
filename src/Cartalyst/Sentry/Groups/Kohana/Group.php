@@ -122,12 +122,7 @@ class Group extends \ORM implements GroupInterface {
 	{
 		$groupPermissions = $this->getPermissions();
 
-		if ( ! is_array($permissions) )
-		{
-			$permissions = (array) $permissions;
-		}
-
-		foreach ($permissions as $permission)
+		foreach ((array) $permissions as $permission)
 		{
 			// We will set a flag now for whether this permission was
 			// matched at all.
@@ -358,7 +353,7 @@ class Group extends \ORM implements GroupInterface {
 			->from($this->_table_name)
 			->where($field, '=', $value)
 			->where($this->_primary_key, '!=', $this->pk())
-			->execute()
+			->execute($this->_db)
 			->get('total_count');
 
 		return ($total == 0);

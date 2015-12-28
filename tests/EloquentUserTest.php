@@ -110,9 +110,11 @@ class EloquentUserTest extends PHPUnit_Framework_TestCase {
 		$relationship = m::mock('StdClass');
 		$relationship->shouldReceive('attach')->with($group)->once();
 
-		$user  = m::mock('Cartalyst\Sentry\Users\Eloquent\User[inGroup,groups]');
+		$user  = m::mock('Cartalyst\Sentry\Users\Eloquent\User[inGroup,groups,invalidateMergedPermissionsCache,invalidateUserGroupsCache]');
 		$user->shouldReceive('inGroup')->once()->andReturn(false);
 		$user->shouldReceive('groups')->once()->andReturn($relationship);
+		$user->shouldReceive('invalidateUserGroupsCache')->once();
+		$user->shouldReceive('invalidateMergedPermissionsCache')->once();
 
 		$this->assertTrue($user->addGroup($group));
 	}
@@ -124,9 +126,11 @@ class EloquentUserTest extends PHPUnit_Framework_TestCase {
 		$relationship = m::mock('StdClass');
 		$relationship->shouldReceive('detach')->with($group)->once();
 
-		$user  = m::mock('Cartalyst\Sentry\Users\Eloquent\User[inGroup,groups]');
+		$user  = m::mock('Cartalyst\Sentry\Users\Eloquent\User[inGroup,groups,invalidateMergedPermissionsCache,invalidateUserGroupsCache]');
 		$user->shouldReceive('inGroup')->once()->andReturn(true);
 		$user->shouldReceive('groups')->once()->andReturn($relationship);
+		$user->shouldReceive('invalidateUserGroupsCache')->once();
+		$user->shouldReceive('invalidateMergedPermissionsCache')->once();
 
 		$this->assertTrue($user->removeGroup($group));
 	}
@@ -472,6 +476,7 @@ class EloquentUserTest extends PHPUnit_Framework_TestCase {
 		// Check the hash
 		$this->assertTrue($user->checkPersistCode('hashed_reset_code'));
 		$this->assertFalse($user->checkPersistCode('not_the_codeed_reset_code'));
+		$this->assertFalse($user->checkPersistCode(true));
 	}
 
 	public function testGetActivationCode()
